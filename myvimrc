@@ -1,0 +1,78 @@
+set nocompatible 
+filetype off 
+ 
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+ 
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plugin 'jistr/vim-nerdtree-tabs'
+"Plugin 'maralla/completor.vim'
+Plugin 'vim-scripts/indentpython.vim'
+Plugin 'vim-syntastic/syntastic'
+Plugin 'nvie/vim-flake8'
+Plugin 'Lokaltog/vim-powerline'
+Plugin 'Yggdroot/indentLine'
+Plugin 'jiangmiao/auto-pairs'
+Plugin 'tpope/vim-fugitive'
+
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+
+set nocompatible 
+set number 
+set nowrap
+set showmatch 
+set scrolloff=3 
+set encoding=utf-8 
+set fenc=utf-8 
+set mouse=a 
+set hlsearch
+syntax on 
+
+au BufRead,BufNewFile *.py
+\ set tabstop=4 |
+\ set softtabstop=4 |
+\ set shiftwidth=4 |
+\ set textwidth=79 |
+\ set expandtab |
+\ set autoindent |
+\ set fileformat=unix 
+
+
+" Enable folding
+set foldmethod=indent
+set foldlevel=99
+" Enable folding with the spacebar
+nnoremap <space> za
+
+map <F5> :call RunPython()<CR>
+func! RunPython()
+    exec "W"
+    if &filetype == 'python'
+        exec "!time python3 %"
+    endif
+endfunc
+
+"let g:completor_python_binary = '/home/yingchun/Applic/miniconda3/bin'
+
+autocmd vimenter * NERDTree
+map <F2> :NERDTreeMirror<CR>
+map <F2> :NERDTreeToggle<CR>
+let NERDTreeIgnore=['\~$', '\.pyc$', '\.swp$']
+let g:NERDTreeDirArrowExpandable = '+'
+let g:NERDTreeDirArrowCollapsible = '-'
+
+"indentLine
+let g:indentLine_char='|'
+let g:indentLine_enabled = 1
+
+"syntax on
+"syntax enable
+"set t_Co=256
+"colorscheme molokai
